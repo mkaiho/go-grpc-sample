@@ -1,0 +1,19 @@
+version: "3.9"
+
+# Variables for mysql database
+x-mysql-database: &MYSQL_DATABASE devdb
+x-mysql-user: &MYSQL_USER devuser
+x-mysql-password: &MYSQL_PASSWORD devdev
+
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: ./docker/workspace/Dockerfile
+    container_name: go-grpc-sample-workspace
+    tty: true
+    volumes:
+      - .:/go/src/github.com/mkaiho/go-grpc-sample
+    working_dir: /go/src/github.com/mkaiho/go-grpc-sample
+    ports:
+      - 3000:3000
