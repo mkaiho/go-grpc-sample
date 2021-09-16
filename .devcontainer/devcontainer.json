@@ -2,5 +2,9 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "workspace",
   "workspaceFolder": "/go/src/github.com/mkaiho/go-grpc-sample",
-  "extensions": ["golang.go"]
+  "extensions": [
+    "golang.go",
+    "xaver.clang-format",
+    "zxh404.vscode-proto3"
+  ]
 }
