@@ -1,6 +1,6 @@
 # go-grpc-sample
 
-## Buid
+## Build
 
 ```.sh
 make build-example
