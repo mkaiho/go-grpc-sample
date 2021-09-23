@@ -5,6 +5,7 @@
   "extensions": [
     "golang.go",
     "xaver.clang-format",
-    "zxh404.vscode-proto3"
+    "zxh404.vscode-proto3",
+    "hashicorp.terraform"
   ]
 }

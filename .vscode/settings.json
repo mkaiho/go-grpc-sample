@@ -1,5 +1,8 @@
 {
   "[go]": {
       "editor.formatOnPaste": true
+  },
+  "[terraform]": {
+    "editor.formatOnSave": true
   }
 }
