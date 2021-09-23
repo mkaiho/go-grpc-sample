@@ -5,16 +5,27 @@ import (
 	"log"
 	"time"
 
+	"github.com/mkaiho/go-grpc-sample/libs"
 	pb "github.com/mkaiho/go-grpc-sample/proto/userspb"
 	"google.golang.org/grpc"
 )
 
 const (
-	address = "localhost:3000"
+	defaultAddress = "localhost"
+	defaultPort    = "3000"
 )
 
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
+	address := libs.GetEnvLoader().GetValue("API_REQUEST_HOST")
+	if address == "" {
+		address = defaultAddress
+	}
+	port := libs.GetEnvLoader().GetValue("API_REQUEST_PORT")
+	if port == "" {
+		port = defaultPort
+	}
+
+	conn, err := grpc.Dial(address+":"+port, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

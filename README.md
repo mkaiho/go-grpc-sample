@@ -6,6 +6,15 @@
 make build-example
 ```
 
+### Set environment variables for app
+
+```.sh
+# if it is not set, "localhost" is used as default
+export API_REQUEST_HOST=<Server host>
+# if it is not set, "3000" is used as default
+export API_REQUEST_PORT=<Server listening port>
+```
+
 ## Start server
 
 ```.sh
@@ -15,7 +24,7 @@ make build-example
 ## Execute client request
 
 ```.sh
-# When you request to EC2 server, you need to modify constant "address" in ./cmd/example_client/main.go and rebuild
+# When you request to EC2 server, you need to set server host and port in environment variables API_REQUEST_HOST and API_REQUEST_PORT
 ./build/example_client
 ```
 

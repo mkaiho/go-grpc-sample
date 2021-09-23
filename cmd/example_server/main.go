@@ -5,12 +5,13 @@ import (
 	"log"
 	"net"
 
+	"github.com/mkaiho/go-grpc-sample/libs"
 	pb "github.com/mkaiho/go-grpc-sample/proto/userspb"
 	"google.golang.org/grpc"
 )
 
 const (
-	port = ":3000"
+	defaultPort = "3000"
 )
 
 type server struct {
@@ -26,7 +27,12 @@ func (s *server) Find(ctx context.Context, in *pb.FindUserRequest) (*pb.FindUser
 }
 
 func main() {
-	listener, err := net.Listen("tcp", port)
+	var port = libs.GetEnvLoader().GetValue("API_REQUEST_PORT")
+	if port == "" {
+		port = defaultPort
+	}
+
+	listener, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v\n", err)
 		return
