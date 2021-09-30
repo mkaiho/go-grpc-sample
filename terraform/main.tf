@@ -123,7 +123,10 @@ resource "aws_instance" "webapp_app_1a" {
   vpc_security_group_ids = [aws_security_group.webapp_app_sg.id]
   key_name               = aws_key_pair.webapp_app_1a_key_name.id
   tags = {
-    "Name" = "grpc-samples-webapp"
+    "Name"             = "go-grpc-sample-webapp"
+    "Application"      = "go-grpc-sample"
+    "ApplicationGroup" = "webservers"
+    "Stage"            = "production"
   }
 }
 

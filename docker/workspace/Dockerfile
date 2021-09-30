@@ -31,9 +31,10 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
 && apt-get update && apt-get install terraform \
 && terraform --version
 
-RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list \
-  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 \
-  && apt-get update \
-  && apt-get install -y ansible
+RUN apt-get install -y python3-distutils \
+  && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+  && python3 get-pip.py \
+  && rm ./get-pip.py \
+  && python3 -m pip install ansible boto3 botocore
 
 WORKDIR $GOPATH/src/$SRC_MODULE

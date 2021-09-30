@@ -52,11 +52,17 @@ aws configure
 ssh-keygen -t rsa -m PEM -f ./.ssh/<your key name>
 ```
 
+### Register ssh key at local
+
+```.sh
+ssh-add ./.ssh/<your private key name>
+```
+
 ### Set environment variables for terraform parameters
 
 ```.sh
 export TF_VAR_webapp_1a_key_name=<your key pair name to connect EC2 instance>
-export TF_VAR_webapp_1a_ssh_public_key=$(cat ./.ssh/<your public key name>
+export TF_VAR_webapp_1a_ssh_public_key=$(cat ./.ssh/<your public key name>)
 export TF_VAR_zone_name=<host zone name in route53>
 ```
 
@@ -74,14 +80,10 @@ cd ./terraform
 terraform apply
 ```
 
-### Start server on EC2
+### Deploy and Start application on EC2
 
 ```.sh
-# upload your app binary
-scp -i ./.ssh/<your private key name> -r ./build ec2-user@<host>:~/build
-# login host and run app server
-ssh -i ./.ssh/<your private key name> ec2-user@<host>
-./build/example_server
+ansible-playbook -i ./ansible/production.aws_ec2.yml ./ansible/roles/webservers/tasks/main.yml
 ```
 
 ### Destroy app server and netowrk

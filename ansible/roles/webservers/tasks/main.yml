@@ -1,0 +1,25 @@
+---
+- hosts: webservers
+  tasks:
+  - name: connection test with ping
+    ping:
+  - name: upload app binary
+    copy:
+      src: /go/src/github.com/mkaiho/go-grpc-sample/build/example_server
+      dest: ~/build/
+      mode: 0755
+  - name: upload app service definition
+    copy:
+      src: /go/src/github.com/mkaiho/go-grpc-sample/ansible/roles/webservers/files/webapp.service
+      dest: /etc/systemd/system/
+      mode: 0755
+    become: yes
+  - name: reload deamon services
+    command: systemctl daemon-reload
+    become: yes
+  - name: start app service
+    command: systemctl start webapp.service
+    become: yes
+  - name: output app service
+    command: systemctl status webapp.service
+    become: yes

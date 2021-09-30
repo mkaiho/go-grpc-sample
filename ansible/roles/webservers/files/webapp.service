@@ -1,0 +1,12 @@
+[Unit]
+Description=WebApp
+
+[Service]
+ExecStart=/bin/bash -c './build/example_server'
+WorkingDirectory=/home/ec2-user
+Restart=always
+Type=simple
+User=root
+
+[Install]
+WantedBy=multi-user.target
